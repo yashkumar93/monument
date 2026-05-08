@@ -1,26 +1,292 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   Theme tokens — Monument Agency
+   ============================================================ */
+
+:root,
+[data-theme="light"] {
+  --c-page: #f4ede1;
+  --c-soft: #ece4d4;
+  --c-card: #ffffff;
+  --c-deep: #e5dcc8;
+  --c-surface: #ece4d4;
+  --c-ink: #14110d;
+  --c-ink-dim: rgba(20, 17, 13, 0.66);
+  --c-ink-mute: rgba(20, 17, 13, 0.42);
+  --c-line: rgba(20, 17, 13, 0.10);
+  --c-line-strong: rgba(20, 17, 13, 0.22);
+  --c-accent: #ec7a5a;
+  --c-accent-fg: #14110d;
+  --c-accent-soft: rgba(236, 122, 90, 0.22);
+  --c-accent-deep: #b04425;
+  --c-accent-tint: rgba(236, 122, 90, 0.14);
+  --c-cursor-blend: multiply;
 }
+
+[data-theme="dark"] {
+  --c-page: #14110d;
+  --c-soft: #1b1813;
+  --c-card: #1f1c16;
+  --c-deep: #0f0d0a;
+  --c-surface: #1f1c16;
+  --c-ink: #f4ede1;
+  --c-ink-dim: rgba(244, 237, 225, 0.66);
+  --c-ink-mute: rgba(244, 237, 225, 0.42);
+  --c-line: rgba(244, 237, 225, 0.10);
+  --c-line-strong: rgba(244, 237, 225, 0.22);
+  --c-accent: #ec7a5a;
+  --c-accent-fg: #14110d;
+  --c-accent-soft: rgba(236, 122, 90, 0.28);
+  --c-accent-deep: #b04425;
+  --c-accent-tint: rgba(236, 122, 90, 0.16);
+  --c-cursor-blend: screen;
+}
+
+/* Switch the dark variant from prefers-color-scheme to a data attribute. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-page: var(--c-page);
+  --color-soft: var(--c-soft);
+  --color-card: var(--c-card);
+  --color-deep: var(--c-deep);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-ink-dim: var(--c-ink-dim);
+  --color-ink-mute: var(--c-ink-mute);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-accent: var(--c-accent);
+  --color-accent-fg: var(--c-accent-fg);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-accent-deep: var(--c-accent-deep);
+  --color-accent-tint: var(--c-accent-tint);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-serif: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Inter Tight", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-card: 18px;
+  --radius-card-lg: 28px;
+
+  --ease-art: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-pulse-dot: pulse-dot 2s infinite;
+  --animate-float: float 14s ease-in-out infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-dot {
+    0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--c-accent) 60%, transparent); }
+    70% { box-shadow: 0 0 0 10px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(8%, -6%) scale(1.08); }
   }
 }
 
+/* Fraunces variable-font SOFT/opsz settings — applied via class */
+@utility font-soft {
+  font-variation-settings: "SOFT" 100;
+}
+@utility font-display {
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  background: var(--c-page);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  transition: background 0.5s var(--ease-art), color 0.5s var(--ease-art);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--c-accent);
+}
+
+/* Hide scrollbar styling can stay browser-default. */
+
+/* ============================================================
+   Tiny custom utilities (things Tailwind makes verbose)
+   ============================================================ */
+
+@utility kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--c-ink-dim);
+  margin-bottom: 32px;
+
+  &::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--c-accent);
+  }
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+@utility mask-radial-soft {
+  mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+}
+
+/* ============================================================
+   Reusable button system (the design has a clear button DNA — easier
+   as a small component layer than re-typing Tailwind soup everywhere)
+   ============================================================ */
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2.5 rounded-full border border-line-strong
+           px-5 py-3 text-sm font-medium tracking-tight text-ink
+           transition-[transform,background-color,color,border-color] duration-300;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn svg {
+    transition: transform 0.4s var(--ease-art);
+  }
+  .btn:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn--lg {
+    @apply px-7 py-4 text-[15px];
+  }
+
+  .btn--ink {
+    background: var(--c-ink);
+    color: var(--c-page);
+    border-color: var(--c-ink);
+  }
+  .btn--ink:hover {
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
+    border-color: var(--c-accent);
+  }
+
+  .btn--accent {
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
+    border-color: var(--c-accent);
+  }
+  .btn--accent:hover {
+    background: color-mix(in oklch, var(--c-accent), white 12%);
+    border-color: color-mix(in oklch, var(--c-accent), white 12%);
+  }
+
+  .nav-pill {
+    @apply mx-auto flex items-center gap-6 rounded-full border border-line py-2 pl-[18px] pr-[10px] backdrop-blur-md;
+    background: color-mix(in oklch, var(--c-page) 78%, transparent);
+  }
+}
+
+/* ============================================================
+   Static effects layered on top of components
+   ============================================================ */
+
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 480px;
+  height: 480px;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle, var(--c-accent-soft) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-art);
+  mix-blend-mode: var(--c-cursor-blend);
+  filter: blur(20px);
+  will-change: transform, opacity;
+}
+.cursor-glow.is-on { opacity: 1; }
+
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--c-accent);
+  z-index: 200;
+  pointer-events: none;
+  transform-origin: 0 0;
+  transition: transform 0.05s linear;
+}
+
+/* ============================================================
+   Marquee + awards (CSS-driven; framer-motion isn't worth it for
+   infinite scrolling tickers — animation jank is lower with CSS)
+   ============================================================ */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: var(--animate-marquee);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Pulsing accent dot */
+.pulse-dot {
+  animation: var(--animate-pulse-dot);
+}
+
+/* ============================================================
+   Print-safe — strip animations and theme noise on print
+   ============================================================ */
+@media print {
+  [data-theme] {
+    --c-page: #ffffff;
+    --c-card: #ffffff;
+    --c-soft: #faf8f5;
+    --c-deep: #faf8f5;
+    --c-ink: #14110d;
+    --c-ink-dim: rgba(20, 17, 13, 0.7);
+    --c-ink-mute: rgba(20, 17, 13, 0.5);
+    --c-line: #d8d2cc;
+    --c-line-strong: #b8aea4;
+  }
+  .cursor-glow,
+  .scroll-progress,
+  .marquee-track,
+  .pulse-dot {
+    display: none !important;
+    animation: none !important;
+  }
 }
