@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { ThemeProvider, themeBootstrapScript } from "@/lib/theme";
+import { Nav } from "@/components/nav";
+import { SiteFooter } from "@/components/site-footer";
+import { Tweaks } from "@/components/tweaks";
+import { CursorGlow } from "@/components/cursor-glow";
+import { ScrollProgress } from "@/components/scroll-progress";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -36,7 +41,14 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-page text-ink antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ScrollProgress />
+          <CursorGlow />
+          <Nav />
+          {children}
+          <SiteFooter />
+          <Tweaks />
+        </ThemeProvider>
       </body>
     </html>
   );

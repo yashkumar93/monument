@@ -1,15 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useTheme } from "@/lib/theme";
 import { ArrowIcon, MoonIcon, SunIcon } from "@/components/icons";
 
-const links = [
-  { label: "Our Team", href: "#team" },
-  { label: "Resources", href: "#resources" },
-  { label: "AI Agents", href: "#pricing" },
-  { label: "Careers", href: "#team" },
+type NavLink = { label: string; href: string };
+
+const links: NavLink[] = [
+  { label: "Our Team", href: "/team" },
+  { label: "Resources", href: "/resources" },
+  { label: "AI Agents", href: "/#pricing" },
+  { label: "Careers", href: "/careers" },
 ];
+
+function isInternalRoute(href: string) {
+  return href.startsWith("/") && !href.startsWith("/#");
+}
 
 export function Nav() {
   const { theme, toggle } = useTheme();
@@ -26,26 +33,36 @@ export function Nav() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 px-[clamp(20px,4vw,48px)] py-5">
         <div className="nav-pill mx-auto max-w-[1240px]">
-          <a
-            href="#top"
+          <Link
+            href="/"
             className="flex items-center gap-2.5 font-serif font-soft text-[19px] tracking-tight text-ink"
           >
             <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-base italic text-accent-fg">
               M
             </span>
             <span>Monument</span>
-          </a>
+          </Link>
 
           <nav className="hidden flex-1 justify-center gap-0.5 md:flex">
-            {links.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="rounded-full px-3.5 py-2 text-[13.5px] text-ink-dim transition-colors hover:bg-soft hover:text-ink"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map((l) =>
+              isInternalRoute(l.href) ? (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  className="rounded-full px-3.5 py-2 text-[13.5px] text-ink-dim transition-colors hover:bg-soft hover:text-ink"
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  className="rounded-full px-3.5 py-2 text-[13.5px] text-ink-dim transition-colors hover:bg-soft hover:text-ink"
+                >
+                  {l.label}
+                </a>
+              ),
+            )}
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
@@ -65,13 +82,13 @@ export function Nav() {
               Log in
             </a>
 
-            <a
-              href="#pricing"
+            <Link
+              href="/#pricing"
               className="hidden items-center gap-2 rounded-full border border-ink bg-ink px-4 py-2.5 text-[13.5px] font-medium text-page transition-[transform,background-color,color,border-color] duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-fg md:inline-flex"
             >
               Get Pricing
               <ArrowIcon width={13} height={13} />
-            </a>
+            </Link>
 
             <button
               type="button"
@@ -121,30 +138,49 @@ function MobileMenu({ open, close }: { open: boolean; close: () => void }) {
       }`}
     >
       <div className="mx-auto flex w-full max-w-lg flex-1 flex-col justify-center gap-1">
-        {links.map((l, i) => (
-          <a
-            key={l.label}
-            href={l.href}
-            onClick={close}
-            className={`flex items-baseline gap-4 border-b border-line py-2 font-serif font-soft text-[clamp(34px,9vw,52px)] font-light leading-tight transition-[opacity,transform,color] duration-500 hover:text-accent ${
-              open ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
-            }`}
-            style={{ transitionDelay: open ? `${50 + i * 50}ms` : "0ms" }}
-          >
-            <span className="font-mono text-[11px] tracking-[0.2em] text-ink-mute">
-              0{i + 1}
-            </span>
-            {l.label}
-          </a>
-        ))}
+        {links.map((l, i) => {
+          const className = `flex items-baseline gap-4 border-b border-line py-2 font-serif font-soft text-[clamp(34px,9vw,52px)] font-light leading-tight transition-[opacity,transform,color] duration-500 hover:text-accent ${
+            open ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+          }`;
+          const style = { transitionDelay: open ? `${50 + i * 50}ms` : "0ms" };
+          const inner = (
+            <>
+              <span className="font-mono text-[11px] tracking-[0.2em] text-ink-mute">
+                0{i + 1}
+              </span>
+              {l.label}
+            </>
+          );
+          return isInternalRoute(l.href) ? (
+            <Link
+              key={l.label}
+              href={l.href}
+              onClick={close}
+              className={className}
+              style={style}
+            >
+              {inner}
+            </Link>
+          ) : (
+            <a
+              key={l.label}
+              href={l.href}
+              onClick={close}
+              className={className}
+              style={style}
+            >
+              {inner}
+            </a>
+          );
+        })}
 
-        <a
-          href="#pricing"
+        <Link
+          href="/#pricing"
           onClick={close}
           className="btn btn--accent btn--lg mt-8 self-start"
         >
           Get Pricing →
-        </a>
+        </Link>
       </div>
     </div>
   );
