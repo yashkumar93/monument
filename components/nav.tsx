@@ -84,7 +84,7 @@ export function Nav() {
             </a>
 
             <Link
-              href="/#pricing"
+              href="/get-pricing"
               className="hidden items-center gap-2 rounded-full border border-ink bg-ink px-4 py-2.5 text-[13.5px] font-medium text-page transition-[transform,background-color,color,border-color] duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-fg md:inline-flex"
             >
               Get Pricing
@@ -176,7 +176,7 @@ function MobileMenu({ open, close }: { open: boolean; close: () => void }) {
         })}
 
         <Link
-          href="/#pricing"
+          href="/get-pricing"
           onClick={close}
           className="btn btn--accent btn--lg mt-8 self-start"
         >
