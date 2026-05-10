@@ -1,13 +1,21 @@
+import Image from "next/image";
 import { Reveal, RevealLine } from "@/components/reveal";
 
-const MEMBERS = [
+type Member = {
+  name: string;
+  role: string;
+  bio: string;
+  photo: string;
+  youtube: string;
+  linkedin: string;
+};
+
+const MEMBERS: Member[] = [
   {
     name: "Brody Billings",
     role: "Founder — CEO",
     bio: "With a proven track record of scaling businesses to seven figures, Brody is our visionary leader, spearheading growth initiatives and setting the pace for success.",
-    gradient:
-      "linear-gradient(155deg, #d8c8a8 0%, #b89a72 50%, #6e5638 100%)",
-    glyph: "B",
+    photo: "/Y658LrlHcXFoNPSXFbmwbO7Lo7c.avif",
     youtube: "#",
     linkedin: "#",
   },
@@ -15,9 +23,7 @@ const MEMBERS = [
     name: "Talal Tariq",
     role: "COO",
     bio: "Talal brings invaluable experience in scaling CPA businesses to new heights, driving forward-thinking strategies that lead to structure and vision.",
-    gradient:
-      "linear-gradient(155deg, #f4c97a 0%, #c97a3e 50%, #2a1810 100%)",
-    glyph: "T",
+    photo: "/VN16W6mGEi5qbxhmQVl2SDgnBQ.avif",
     youtube: "#",
     linkedin: "#",
   },
@@ -66,32 +72,15 @@ export function TeamGrid() {
         {MEMBERS.map((m) => (
           <Reveal key={m.name}>
             <article className="flex flex-col">
-              <div
-                className="relative mb-5 aspect-square overflow-hidden rounded-[14px] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.5)]"
-                style={{ background: m.gradient }}
-              >
-                <div
-                  aria-hidden
-                  className="absolute inset-0 mix-blend-overlay"
-                  style={{
-                    backgroundImage: [
-                      "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.22), transparent 45%)",
-                      "radial-gradient(circle at 75% 80%, rgba(0,0,0,0.30), transparent 55%)",
-                      "repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 4px)",
-                    ].join(","),
-                  }}
+              <div className="relative mb-5 aspect-square overflow-hidden rounded-[14px] bg-soft shadow-[0_30px_80px_-40px_rgba(0,0,0,0.5)]">
+                <Image
+                  src={m.photo}
+                  alt={`Portrait of ${m.name}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 460px"
+                  className="object-cover"
+                  priority
                 />
-                <div
-                  aria-hidden
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 font-serif font-display font-light italic leading-none"
-                  style={{
-                    fontSize: "18rem",
-                    color: "rgba(255, 247, 238, 0.28)",
-                    transform: "translate(-50%, -54%)",
-                  }}
-                >
-                  {m.glyph}
-                </div>
               </div>
 
               <div>
