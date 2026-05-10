@@ -76,7 +76,8 @@ export function Nav() {
             </button>
 
             <a
-              href="#login"
+              href="https://seer.monument.solutions/"
+              rel="noopener noreferrer"
               className="hidden rounded-full px-3.5 py-2 text-[13.5px] text-ink-dim transition-colors hover:bg-soft hover:text-ink md:inline-block"
             >
               Log in
