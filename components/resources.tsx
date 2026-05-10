@@ -1,7 +1,17 @@
+import Link from "next/link";
 import { Reveal, RevealLine } from "@/components/reveal";
 import { ArrowIcon } from "@/components/icons";
 
-const ARTICLES = [
+type Article = {
+  cat: string;
+  date: string;
+  title: string;
+  gradient: string;
+  glyph: string;
+  href: string;
+};
+
+const ARTICLES: Article[] = [
   {
     cat: "Scaling",
     date: "Apr 8, 2026",
@@ -10,6 +20,7 @@ const ARTICLES = [
     gradient:
       "linear-gradient(155deg, #5e6b73 0%, #2a2f33 50%, #0f1216 100%)",
     glyph: "⌘",
+    href: "/resources/scaling",
   },
   {
     cat: "Processes",
@@ -19,6 +30,7 @@ const ARTICLES = [
     gradient:
       "linear-gradient(135deg, #c97a3e 0%, #6e3a1c 50%, #1a1410 100%)",
     glyph: "AI",
+    href: "/resources/from-manual-to-magic",
   },
   {
     cat: "Landing Pages",
@@ -28,6 +40,7 @@ const ARTICLES = [
     gradient:
       "linear-gradient(135deg, #2d5a8a 0%, #c93a6e 70%, #1a0f1a 100%)",
     glyph: "01",
+    href: "/resources/unlocking-growth-data",
   },
 ];
 
@@ -71,8 +84,8 @@ export function ArticlesGrid() {
       <div className="grid max-w-[1080px] grid-cols-1 gap-9 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
         {ARTICLES.map((a) => (
           <Reveal key={a.title}>
-            <a
-              href="#"
+            <Link
+              href={a.href}
               className="group flex flex-col text-ink transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1"
             >
               <div
@@ -118,7 +131,7 @@ export function ArticlesGrid() {
               <h2 className="m-0 font-serif font-soft text-[clamp(18px,1.5vw,22px)] font-normal leading-[1.25] tracking-[-0.012em] text-pretty transition-colors duration-300 group-hover:text-accent">
                 {a.title}
               </h2>
-            </a>
+            </Link>
           </Reveal>
         ))}
       </div>

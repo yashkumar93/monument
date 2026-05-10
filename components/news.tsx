@@ -1,23 +1,29 @@
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 
-const POSTS = [
+type Post = { cat: string; date: string; title: string; href: string };
+
+const POSTS: Post[] = [
   {
     cat: "Scaling",
     date: "APR 8 2026",
     title:
       "The CPA's Playbook for Exponential Growth: How to Scale Your Firm Without a Sales Army.",
+    href: "/resources/scaling",
   },
   {
     cat: "Processes",
     date: "FEB 28 2026",
     title:
       "From Manual to Magic: How AI-Powered Workflows are Transforming Accounting Firms.",
+    href: "#",
   },
   {
     cat: "Landing Pages",
     date: "MAR 15 2026",
     title:
       "Unlocking Growth Through Data: How CPA Firms Can Leverage Analytics for Strategic Decisions.",
+    href: "#",
   },
 ];
 
@@ -40,16 +46,16 @@ export function News() {
             </h2>
           </Reveal>
         </div>
-        <a href="#" className="btn">
+        <Link href="/resources" className="btn">
           All resources →
-        </a>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
         {POSTS.map((p, i) => (
           <Reveal key={p.title}>
-            <a
-              href="#"
+            <Link
+              href={p.href}
               className="group flex flex-col gap-4.5 transition-transform duration-500 hover:-translate-y-1.5"
             >
               <div
@@ -89,7 +95,7 @@ export function News() {
               <h3 className="font-serif font-soft text-[clamp(20px,2vw,26px)] font-light leading-[1.18] tracking-tight text-balance transition-colors duration-300 group-hover:text-accent">
                 {p.title}
               </h3>
-            </a>
+            </Link>
           </Reveal>
         ))}
       </div>
