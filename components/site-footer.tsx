@@ -1,10 +1,34 @@
-const COLS = [
-  { title: "Pages", links: ["Home", "Our Team", "Careers", "Resources"] },
+type ColLink = { label: string; href: string };
+type Col = { title: string; links: ColLink[] };
+
+const COLS: Col[] = [
+  {
+    title: "Pages",
+    links: [
+      { label: "Home", href: "/" },
+      { label: "Our Team", href: "/team" },
+      { label: "Careers", href: "/careers" },
+      { label: "Resources", href: "/resources" },
+    ],
+  },
   {
     title: "Services",
-    links: ["Market Analysis", "Sales Assets", "Offer Refinement", "AI Agents"],
+    links: [
+      { label: "Market Analysis", href: "#" },
+      { label: "Sales Assets", href: "#" },
+      { label: "Offer Refinement", href: "#" },
+      { label: "AI Agents", href: "/ai-agents" },
+    ],
   },
-  { title: "Follow Us", links: ["LinkedIn", "Facebook", "Twitter / X", "YouTube"] },
+  {
+    title: "Follow Us",
+    links: [
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/monument-solutions/" },
+      { label: "Facebook", href: "#" },
+      { label: "Twitter / X", href: "#" },
+      { label: "YouTube", href: "#" },
+    ],
+  },
 ];
 
 export function SiteFooter() {
@@ -71,12 +95,13 @@ export function SiteFooter() {
             </div>
             <ul className="space-y-1.5">
               {col.links.map((l) => (
-                <li key={l}>
+                <li key={l.label}>
                   <a
-                    href="#"
+                    href={l.href}
+                    {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="text-sm text-ink-dim transition-colors duration-300 hover:text-accent"
                   >
-                    {l}
+                    {l.label}
                   </a>
                 </li>
               ))}
