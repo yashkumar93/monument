@@ -3,7 +3,6 @@ import { Spotlight } from "@/components/spotlight";
 import { LogoWall } from "@/components/logo-wall";
 import { Services } from "@/components/services";
 import { Method } from "@/components/method";
-import { Numbers } from "@/components/numbers";
 import { Testimonials } from "@/components/testimonials";
 import { Pricing } from "@/components/pricing";
 import { News } from "@/components/news";
@@ -18,7 +17,6 @@ export default function Home() {
       <LogoWall />
       <Services />
       <Method />
-      <Numbers />
       <Testimonials />
       <Pricing />
       <News />

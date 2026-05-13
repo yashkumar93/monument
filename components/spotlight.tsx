@@ -1,12 +1,6 @@
 import { Reveal, RevealLine } from "@/components/reveal";
 import { ArrowIcon } from "@/components/icons";
 
-const METRICS = [
-  { num: "01", value: "10", suffix: "×", label: "Typical ROI in year one" },
-  { num: "02", value: "100", suffix: "+", label: "Firms scaled with us" },
-  { num: "03", value: "$45", suffix: "M+", label: "Net new revenue generated" },
-  { num: "04", value: "12", suffix: "mo", label: "Avg. infrastructure runway" },
-];
 
 const TAGS = ["Sales Infrastructure", "Outbound · Inbound", "Ongoing"];
 
@@ -88,27 +82,6 @@ export function Spotlight() {
         </div>
       </div>
 
-      <Reveal>
-        <div className="grid grid-cols-2 border-l border-t border-line lg:grid-cols-4">
-          {METRICS.map((m) => (
-            <div
-              key={m.num}
-              className="relative flex flex-col gap-3 border-b border-r border-line p-6 transition-colors duration-500 hover:bg-surface sm:gap-3.5 sm:p-9"
-            >
-              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
-                {m.num}
-              </div>
-              <div className="font-serif font-display text-[clamp(48px,5.5vw,80px)] font-light leading-[0.95] tracking-[-0.045em]">
-                {m.value}
-                <em className="ml-0.5 text-[0.55em] text-accent">{m.suffix}</em>
-              </div>
-              <div className="mt-auto max-w-[22ch] font-mono text-[10.5px] uppercase leading-[1.5] tracking-[0.16em] text-ink-mute">
-                {m.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </Reveal>
     </section>
   );
 }

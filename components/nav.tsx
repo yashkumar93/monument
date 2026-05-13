@@ -37,8 +37,12 @@ export function Nav() {
             href="/"
             className="flex items-center gap-2.5 font-serif font-soft text-[19px] tracking-tight text-ink"
           >
-            <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-base italic text-accent-fg">
+            <span className="relative grid h-7 w-7 flex-shrink-0 place-items-center rounded-lg bg-ink text-[17px] italic text-page">
               M
+              <span
+                aria-hidden
+                className="absolute right-[5px] top-[5px] h-[5px] w-[5px] rounded-full bg-accent"
+              />
             </span>
             <span>Monument</span>
           </Link>

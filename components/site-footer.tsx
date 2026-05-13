@@ -12,21 +12,40 @@ export function SiteFooter() {
     <footer className="relative overflow-hidden border-t border-line bg-page">
       <div
         aria-hidden
-        className="pt-10 text-center font-serif font-display text-[clamp(120px,22vw,300px)] font-light italic leading-[0.85] tracking-[-0.05em] opacity-15 select-none"
-        style={{
-          background: "linear-gradient(180deg, var(--c-ink) 0%, transparent 88%)",
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          color: "transparent",
-        }}
+        className="pt-10 text-center font-serif font-display text-[clamp(120px,22vw,300px)] font-light italic leading-[0.85] tracking-[-0.05em] select-none"
       >
-        Monument
+        <span
+          style={{
+            background: "linear-gradient(180deg, var(--c-ink) 0%, transparent 88%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            opacity: 0.13,
+          }}
+        >
+          Monument
+        </span>
+        <span className="text-accent" style={{ opacity: 0.55 }}>.</span>
       </div>
 
       <div className="mx-auto grid max-w-[1240px] grid-cols-2 gap-x-6 gap-y-10 border-t border-line px-[clamp(20px,4vw,48px)] pb-9 pt-14 md:grid-cols-[1.6fr_1fr_1fr_1fr] md:gap-10">
         <div className="col-span-2 md:col-span-1">
-          <div className="mb-3 font-serif font-soft text-[24px] tracking-tight sm:text-[26px]">
-            Monument <em>Solutions</em>
+          <div className="mb-5 flex items-center gap-3">
+            <span className="relative grid h-8 w-8 flex-shrink-0 place-items-center rounded-[10px] bg-ink text-[19px] italic text-page">
+              M
+              <span
+                aria-hidden
+                className="absolute right-[6px] top-[6px] h-[5px] w-[5px] rounded-full bg-accent"
+              />
+            </span>
+            <div>
+              <div className="font-serif font-soft text-[20px] leading-none tracking-tight text-ink">
+                Monument<em className="text-accent not-italic">.</em>
+              </div>
+              <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.22em] text-ink-mute">
+                Solutions · Est. 2017
+              </div>
+            </div>
           </div>
           <div className="mb-5 max-w-[38ch] text-sm text-ink-dim">
             We solve client acquisition and scaling for ambitious businesses.

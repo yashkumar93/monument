@@ -111,12 +111,6 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.15}>
-          <div className="grid grid-cols-2 gap-5 border-t border-line pt-6 sm:gap-6">
-            <MetaBlock label="Trusted by" value="100+ businesses" />
-            <MetaBlock label="Typical ROI" value="10× in year one" />
-          </div>
-        </Reveal>
       </div>
 
       <Marquee />
@@ -124,18 +118,6 @@ export function Hero() {
   );
 }
 
-function MetaBlock({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-mute">
-        {label}
-      </div>
-      <div className="font-serif font-soft text-[clamp(18px,1.6vw,22px)] font-light leading-tight tracking-tight">
-        {value}
-      </div>
-    </div>
-  );
-}
 
 function Marquee() {
   const passes = [0, 1];

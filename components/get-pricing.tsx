@@ -14,11 +14,11 @@ export function GetPricing() {
   };
 
   return (
-    <section className="relative mx-auto max-w-[1280px] px-[clamp(20px,4vw,48px)] py-[clamp(80px,14vw,180px)] text-center">
+    <section className="relative mx-auto max-w-[1280px] px-[clamp(20px,4vw,48px)] pt-[clamp(100px,8vw,130px)] pb-[clamp(60px,6vw,100px)] text-center">
       <BackgroundBlobs />
 
       <Reveal>
-        <div className="mb-7 flex items-center justify-center gap-3.5 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+        <div className="mb-5 flex items-center justify-center gap-3.5 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
           <span className="h-px w-14 bg-line" />
           <span>(A.01)</span>
           <span
@@ -34,7 +34,7 @@ export function GetPricing() {
       </Reveal>
 
       <Reveal>
-        <div className="mb-10 inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-line-strong bg-[color-mix(in_oklch,var(--c-page)_50%,transparent)] px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-dim backdrop-blur-md">
+        <div className="mb-6 inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-line-strong bg-[color-mix(in_oklch,var(--c-page)_50%,transparent)] px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-dim backdrop-blur-md">
           <span
             className="pulse-dot h-[7px] w-[7px] rounded-full bg-accent"
             aria-hidden
@@ -45,7 +45,7 @@ export function GetPricing() {
 
       <Reveal>
         <h1
-          className="mb-8 text-[clamp(72px,13vw,220px)] font-normal leading-[0.86] tracking-[-0.045em] text-balance"
+          className="mb-5 text-[clamp(42px,5.5vw,80px)] font-normal leading-[0.92] tracking-[-0.04em] text-balance"
           style={{ fontFamily: INSTRUMENT }}
         >
           Arrange your
@@ -61,7 +61,7 @@ export function GetPricing() {
 
       <Reveal>
         <p
-          className="mx-auto mb-[clamp(72px,10vw,130px)] max-w-[38ch] text-[clamp(22px,2.2vw,32px)] font-normal italic leading-[1.4] text-ink-dim"
+          className="mx-auto mb-[clamp(32px,4vw,48px)] max-w-[38ch] text-[clamp(15px,1.5vw,20px)] font-normal italic leading-[1.4] text-ink-dim"
           style={{ fontFamily: INSTRUMENT }}
         >
           A 2-minute call. A real number. No sales theatre.
